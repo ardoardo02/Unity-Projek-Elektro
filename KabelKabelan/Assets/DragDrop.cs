@@ -5,8 +5,12 @@ using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    [SerializeField] string partType;
+    
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+
+    public string PartType { get => partType; set => partType = value; }
 
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
