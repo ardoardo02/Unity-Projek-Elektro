@@ -22,4 +22,9 @@ public class PortCable : MonoBehaviour
 		Debug.Log ("You have clicked the button!");
         line.DragLine(this);
 	}
+
+  public void CheckLine()
+  {
+    line.CheckDrag(this);
+  }
 }

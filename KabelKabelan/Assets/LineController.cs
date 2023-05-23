@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LineController : MonoBehaviour
@@ -29,6 +30,33 @@ public class LineController : MonoBehaviour
         }
     }
 
+    void PrintPortPoints()
+    {
+        if(portPoints.Count == 0)
+        {
+            Debug.Log("List is empty");
+            return;
+        }
+
+        foreach (KeyValuePair<PortCable, PortCable> portPoint in portPoints)
+        {
+            Debug.Log(portPoint.Key.name + " " + portPoint.Value.name);
+        }
+    }
+
+    public void CheckDrag(PortCable port)
+    {
+        if(port == portCable){
+            RemoveLine();
+            return;
+        }
+
+        if(IsConnected(port)){
+            CheckPortPoints(port);
+            return;
+        }
+    }
+
     public void DragLine(PortCable port)
     {
         if(port == portCable){
@@ -37,11 +65,20 @@ public class LineController : MonoBehaviour
         }
 
         if(portCable != null){
+            if(IsConnected(port)){
+                RemoveLine();
+                return;
+            }
             points.Add(port.transform);
             portPoints.Add(portCable, port);
             SetUpLine();
             return;
         }
+
+        // if(CheckPortPoints(port)){
+        //     return;
+        // }
+        CheckPortPoints(port);
 
         // PrintList();
 
@@ -76,6 +113,8 @@ public class LineController : MonoBehaviour
             ));
         }
 
+        points.Clear();
+
         // this.points = points;
     }
 
@@ -95,18 +134,47 @@ public class LineController : MonoBehaviour
         {
             if(portPoint.Key == checkPort || portPoint.Value == checkPort)
             {
-                Debug.Log("Port is already connected");
+                // Debug.Log("Port is already connected");
+
+                PrintPortPoints();
+                int i = portPoints.Keys.ToList().IndexOf(portPoint.Key);
+                Debug.Log(i);
+                Destroy(transform.GetChild(i).gameObject);
+                portPoints.Remove(portPoint.Key);
+                points.Clear();
+                RearrangePortPoints();
+                PrintPortPoints();
                 return;
             }
         }
+        // return false;
     }
 
-    void GetIndexPortPoints()
+    void RearrangePortPoints()
+    {
+        Dictionary<PortCable, PortCable> tempPortPoints = new Dictionary<PortCable, PortCable>();
+        foreach (KeyValuePair<PortCable, PortCable> portPoint in portPoints)
+        {
+            if(portPoint.Key == null || portPoint.Value == null)
+            {
+                continue;
+            }
+            tempPortPoints.Add(portPoint.Key, portPoint.Value);
+        }
+        portPoints = tempPortPoints;
+    }
+
+    bool IsConnected(PortCable checkPort)
     {
         foreach (KeyValuePair<PortCable, PortCable> portPoint in portPoints)
         {
-            Debug.Log(portPoint.Key.name + " " + portPoint.Value.name);
+            if(portPoint.Key == checkPort || portPoint.Value == checkPort)
+            {
+                Debug.Log("Port is already connected");
+                return true;
+            }
         }
+        return false;
     }
 
     private void Update() {
