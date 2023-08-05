@@ -10,12 +10,10 @@ public class BridgeInputPort : Port
         relatedBridgeOutput.gameObject.SetActive(false); // Awalnya dinonaktifkan
     }
 
-    public override void Connect(Port other)
-    {
+    public override void Connect(Port other) {
         base.Connect(other);
 
-        if (relatedBridgeOutput != null)
-        {
+        if (relatedBridgeOutput != null) {
             relatedBridgeOutput.gameObject.SetActive(true); // Aktifkan BridgeOutputPort terkait
 
             // Salin informasi jika ini adalah ICPort
@@ -26,12 +24,10 @@ public class BridgeInputPort : Port
         }
     }
 
-    public override void Disconnect()
-    {
+    public override void Disconnect() {
         base.Disconnect();
 
-        if (relatedBridgeOutput != null)
-        {
+        if (relatedBridgeOutput != null) {
             relatedBridgeOutput.Information = ""; // Hapus informasi
             relatedBridgeOutput.gameObject.SetActive(false); // Nonaktifkan BridgeOutputPort terkait
             portManager.DisconnectExistingConnection(relatedBridgeOutput); // Hapus garis yang terhubung dengan BridgeOutputPort

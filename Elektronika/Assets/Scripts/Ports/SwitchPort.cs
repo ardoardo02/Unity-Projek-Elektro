@@ -17,24 +17,21 @@ public class SwitchPort : Port
         toggleObject.TriggerClickEvent -= ToggleLight;
     }
 
-    public override void Connect(Port other)
-    {
+    public override void Connect(Port other) {
         base.Connect(other);
 
         // Jika terhubung dengan BridgeOutputPort, terima informasi
-        if (other is BridgeOutputPort bridgeOutputPort)
-        {
+        if (other is BridgeOutputPort bridgeOutputPort) {
             receivedInformation = bridgeOutputPort.Information;
+
             // Aktifkan Toggle jika menerima informasi
-            if (!string.IsNullOrEmpty(receivedInformation))
-            {
+            if (!string.IsNullOrEmpty(receivedInformation)) {
                 toggleObject.ToggleSwitch(true);
             }
         }
     }
 
-    public override void Disconnect()
-    {
+    public override void Disconnect(){
         base.Disconnect();
 
         // Nonaktifkan Toggle saat terputus
@@ -43,14 +40,12 @@ public class SwitchPort : Port
         receivedInformation = "";
     }
 
-    public void ToggleLight()
-    {
-        if (lightObjectParent != null && toggleObject.gameObject.activeSelf)
+    public void ToggleLight() {
+        if (lightObjectParent != null && toggleObject.gameObject.activeSelf) 
         {
-            foreach (Transform child in lightObjectParent)
+            foreach (Transform child in lightObjectParent) 
             {
-                if (child.name == receivedInformation)
-                {
+                if (child.name == receivedInformation) {
                     SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
                     lightSpriteRenderer.color = lightSpriteRenderer.color == Color.white ? Color.yellow : Color.white;
                 }
@@ -58,14 +53,12 @@ public class SwitchPort : Port
         }
     }
 
-    private void TurnOffLights()
-    {
+    private void TurnOffLights(){
         if (lightObjectParent != null)
         {
             foreach (Transform child in lightObjectParent)
             {
-                if (child.name == receivedInformation)
-                {
+                if (child.name == receivedInformation) {
                     SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
                     lightSpriteRenderer.color = Color.white;
                 }

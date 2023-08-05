@@ -9,11 +9,9 @@ public class BridgeOutputPort : Port
 
     public string Information { get => information; set => information = value; }
 
-    public override bool CanConnect(Port other)
-    {
+    public override bool CanConnect(Port other) {
         // Cegah terhubung dengan Port yang sedang terhubung dengan BridgeInputPort
-        if (other.GetConnectedPortType() == typeof(BridgeInputPort))
-        {
+        if (other.GetConnectedPortType() == typeof(BridgeInputPort)) {
             return false;
         }
 

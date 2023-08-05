@@ -6,22 +6,19 @@ public class Connection
     public Port PortB { get; private set; }
     public LineRenderer Line { get; private set; }
 
-    public Connection(Port portA, Port portB, LineRenderer line)
-    {
+    public Connection(Port portA, Port portB, LineRenderer line) {
         PortA = portA;
         PortB = portB;
         Line = line;
     }
 
-    public void Disconnect()
-    {
+    public void Disconnect() {
         PortA.SetConnectedLine(null);
         PortB.SetConnectedLine(null);
         Object.Destroy(Line.gameObject);
     }
 
-    public bool ContainsPort(Port port)
-    {
+    public bool ContainsPort(Port port) {
         return port == PortA || port == PortB;
     }
 }
