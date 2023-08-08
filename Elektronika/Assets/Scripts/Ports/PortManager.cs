@@ -77,6 +77,7 @@ public class PortManager : MonoBehaviour
                 targetPort.SetConnectedPort(selectedPort);
 
                 connections.Add(new Connection(selectedPort, targetPort, currentLine));
+                Debug.Log(connections.Count);
             }
             else {
                 Destroy(currentLine.gameObject);

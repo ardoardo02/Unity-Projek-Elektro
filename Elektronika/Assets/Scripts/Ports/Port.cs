@@ -8,6 +8,7 @@ public class Port : MonoBehaviour
     protected Port connectedPort;
 
     public LineRenderer ConnectedLine { get => connectedLine; }
+    public Port ConnectedPort { get => connectedPort; }
 
     public virtual bool CanConnect(Port other) {
         // Pengecekan ini untuk mencegah BridgeOutputPort terhubung dengan BridgeInputPort
@@ -38,6 +39,8 @@ public class Port : MonoBehaviour
             Destroy(connectedLine.gameObject);
             connectedLine = null;
         }
+
+        connectedPort = null;
     }
 
     public Type GetConnectedPortType() {

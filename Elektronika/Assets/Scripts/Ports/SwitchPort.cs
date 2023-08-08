@@ -3,18 +3,20 @@ using UnityEngine;
 public class SwitchPort : Port
 {
     [Header("Switch Settings")]
+    [SerializeField, Tooltip("Related Ground Switch Port")] private GroundSwitchPort relatedGroundSwitchPort;
     [SerializeField, Tooltip("Related Toggle Object")] private Switch toggleObject;
     [SerializeField, Tooltip("Related Light Object Parent")] private Transform lightObjectParent;
 
-    SpriteRenderer lightSpriteRenderer;
     string receivedInformation = "";
 
     private void Start() {
         toggleObject.TriggerClickEvent += ToggleLight;
+        relatedGroundSwitchPort.TriggerTurnOffLightEvent += TurnOffLights;
     }
 
     private void OnDestroy() {
         toggleObject.TriggerClickEvent -= ToggleLight;
+        relatedGroundSwitchPort.TriggerTurnOffLightEvent -= TurnOffLights;
     }
 
     public override void Connect(Port other) {
@@ -41,13 +43,18 @@ public class SwitchPort : Port
     }
 
     public void ToggleLight() {
-        if (lightObjectParent != null && toggleObject.gameObject.activeSelf) 
+        if((relatedGroundSwitchPort.ConnectedPort is GroundPort && relatedGroundSwitchPort.IsActive) || 
+            (relatedGroundSwitchPort.ConnectedPort is GroundSwitchExtraPort && ((GroundSwitchExtraPort)relatedGroundSwitchPort.ConnectedPort).IsActive)) 
         {
-            foreach (Transform child in lightObjectParent) 
+            if (lightObjectParent != null && toggleObject.gameObject.activeSelf) 
             {
-                if (child.name == receivedInformation) {
-                    SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
-                    lightSpriteRenderer.color = lightSpriteRenderer.color == Color.white ? Color.yellow : Color.white;
+                foreach (Transform child in lightObjectParent) 
+                {
+                    if (child.name == receivedInformation) 
+                    {
+                        SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
+                        lightSpriteRenderer.color = lightSpriteRenderer.color == Color.white ? Color.yellow : Color.white;
+                    }
                 }
             }
         }

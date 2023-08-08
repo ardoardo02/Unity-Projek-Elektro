@@ -17,8 +17,7 @@ public class BridgeInputPort : Port
             relatedBridgeOutput.gameObject.SetActive(true); // Aktifkan BridgeOutputPort terkait
 
             // Salin informasi jika ini adalah ICPort
-            if (other is ICPort icPort)
-            {
+            if (other is ICPort icPort) {
                 relatedBridgeOutput.Information = icPort.Information;
             }
         }
