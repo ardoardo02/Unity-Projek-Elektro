@@ -35,4 +35,8 @@ public class Switch : MonoBehaviour
         isEnabled = isOn;
         spriteRenderer.color = isEnabled ? Color.white : new Color32(60, 60, 60, 255);
     }
+
+    public void ChangeColor(Color color) {
+        spriteRenderer.material.color = color;
+    }
 }

@@ -5,18 +5,24 @@ public class SwitchPort : Port
     [Header("Switch Settings")]
     [SerializeField, Tooltip("Related Ground Switch Port")] private GroundSwitchPort relatedGroundSwitchPort;
     [SerializeField, Tooltip("Related Toggle Object")] private Switch toggleObject;
-    [SerializeField, Tooltip("Related Light Object Parent")] private Transform lightObjectParent;
+    [SerializeField] SwitchManager switchManager;
 
     string receivedInformation = "";
+    bool isToggleActive = false;
+
+    public bool IsToggleActive { get => isToggleActive; }
+    public string ReceivedInformation { get => receivedInformation; }
 
     private void Start() {
-        toggleObject.TriggerClickEvent += ToggleLight;
-        relatedGroundSwitchPort.TriggerTurnOffLightEvent += TurnOffLights;
+        toggleObject.TriggerClickEvent += ToggleSwitch;
+        relatedGroundSwitchPort.TriggerTurnOffLightEvent += TurnOffSwitch;
+        relatedGroundSwitchPort.TriggerPortActivatedEvent += TurnOnSwitch;
     }
 
     private void OnDestroy() {
-        toggleObject.TriggerClickEvent -= ToggleLight;
-        relatedGroundSwitchPort.TriggerTurnOffLightEvent -= TurnOffLights;
+        toggleObject.TriggerClickEvent -= ToggleSwitch;
+        relatedGroundSwitchPort.TriggerTurnOffLightEvent -= TurnOffSwitch;
+        relatedGroundSwitchPort.TriggerPortActivatedEvent -= TurnOnSwitch;
     }
 
     public override void Connect(Port other) {
@@ -27,7 +33,7 @@ public class SwitchPort : Port
             receivedInformation = bridgeOutputPort.Information;
 
             // Aktifkan Toggle jika menerima informasi
-            if (!string.IsNullOrEmpty(receivedInformation)) {
+            if (!string.IsNullOrEmpty(receivedInformation) && IsGroundSwitchActive()) {
                 toggleObject.ToggleSwitch(true);
             }
         }
@@ -37,39 +43,33 @@ public class SwitchPort : Port
         base.Disconnect();
 
         // Nonaktifkan Toggle saat terputus
-        toggleObject.ToggleSwitch(false);
-        TurnOffLights();
         receivedInformation = "";
+        TurnOffSwitch();
     }
 
-    public void ToggleLight() {
-        if((relatedGroundSwitchPort.ConnectedPort is GroundPort && relatedGroundSwitchPort.IsActive) || 
-            (relatedGroundSwitchPort.ConnectedPort is GroundSwitchExtraPort && ((GroundSwitchExtraPort)relatedGroundSwitchPort.ConnectedPort).IsActive)) 
-        {
-            if (lightObjectParent != null && toggleObject.gameObject.activeSelf) 
-            {
-                foreach (Transform child in lightObjectParent) 
-                {
-                    if (child.name == receivedInformation) 
-                    {
-                        SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
-                        lightSpriteRenderer.color = lightSpriteRenderer.color == Color.white ? Color.yellow : Color.white;
-                    }
-                }
-            }
-        }
+    public void ToggleSwitch() {
+        isToggleActive = !isToggleActive;
+        toggleObject.ChangeColor(isToggleActive ? Color.green : Color.white);
+        switchManager.CheckSwitches();
     }
 
-    private void TurnOffLights(){
-        if (lightObjectParent != null)
-        {
-            foreach (Transform child in lightObjectParent)
-            {
-                if (child.name == receivedInformation) {
-                    SpriteRenderer lightSpriteRenderer = child.GetComponent<SpriteRenderer>();
-                    lightSpriteRenderer.color = Color.white;
-                }
-            }
+    public void TurnOnSwitch() {
+        if (connectedPort != null)
+            toggleObject.ToggleSwitch(true);
+    }
+
+    public void TurnOffSwitch() {
+        isToggleActive = false;
+        toggleObject.ToggleSwitch(false);
+        toggleObject.ChangeColor(Color.white);
+        switchManager.CheckSwitches();
+    }
+
+    public bool IsGroundSwitchActive() {
+        if ((relatedGroundSwitchPort.ConnectedPort is GroundPort && relatedGroundSwitchPort.IsActive) ||
+            (relatedGroundSwitchPort.ConnectedPort is GroundSwitchExtraPort && ((GroundSwitchExtraPort)relatedGroundSwitchPort.ConnectedPort).IsActive)) {
+            return true;
         }
+        return false;
     }
 }

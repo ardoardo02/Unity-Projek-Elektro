@@ -10,6 +10,7 @@ public class GroundSwitchPort : Port
     bool isActive = false;
 
     public Action TriggerTurnOffLightEvent;
+    public Action TriggerPortActivatedEvent;
     public bool IsActive { get => isActive; }
 
     private void Start() 
@@ -24,6 +25,9 @@ public class GroundSwitchPort : Port
         if(relatedGroundSwitchExtra) {
             isActive = true;
             relatedGroundSwitchExtra.IsActive = true;
+            TriggerPortActivatedEvent?.Invoke();
+            if(relatedGroundSwitchExtra.ConnectedPort is GroundSwitchPort groundSwitchPort)
+                groundSwitchPort.ActivatePort();
         }
     }
 
@@ -43,7 +47,8 @@ public class GroundSwitchPort : Port
         if(relatedGroundSwitchExtra) {
             relatedGroundSwitchExtra.gameObject.SetActive(true);
 
-            if (other is GroundPort groundPort && groundPort.IsActive) {
+            if ((other is GroundPort groundPort && groundPort.IsActive) ||
+                (other is GroundSwitchExtraPort groundSwitchExtraPort && groundSwitchExtraPort.IsActive)) {
                 ActivatePort();
             }
         }
