@@ -15,9 +15,9 @@ public class LEDPort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if (other is ICPort portIC) {
-            if (!string.IsNullOrEmpty(portIC.Information)){
-                receivedInformation = portIC.Information;
+        if (other is ResistorOutputPort resistorOutputPort) {
+            if (!string.IsNullOrEmpty(resistorOutputPort.Information)){
+                receivedInformation = resistorOutputPort.Information;
                 switchManager.CheckSwitches();
             }
         }
@@ -32,5 +32,16 @@ public class LEDPort : Port
 
     public void TurnLight(bool isOn) {
         lightSpriteRenderer.color = isOn ? Color.yellow : Color.white;
+    }
+
+    public void CheckSwitch() {
+        if(connectedPort != null && connectedPort is ResistorOutputPort) {
+            ResistorOutputPort resistorOutputPort = (ResistorOutputPort)connectedPort;
+            if (!string.IsNullOrEmpty(resistorOutputPort.Information)){
+                receivedInformation = resistorOutputPort.Information;
+                switchManager.CheckSwitches();
+                // Debug.Log("LEDPort: Check Switch");
+            }
+        }
     }
 }

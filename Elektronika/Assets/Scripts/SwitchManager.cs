@@ -12,6 +12,7 @@ public class SwitchManager : MonoBehaviour
         for (; step >= 0; step--)
         {
             bool found = false;
+            Debug.Log("Step: " + step);
 
             foreach (var switchPort in switchPorts)
             {
@@ -65,6 +66,7 @@ public class SwitchManager : MonoBehaviour
 
     public void TurnLamps(params string[] lampCodes)
     {
+        // Debug.Log("Turning Off Lamps");
         foreach (var ledPort in ledPorts)
         {
             ledPort.TurnLight(false);
@@ -75,10 +77,12 @@ public class SwitchManager : MonoBehaviour
             return;
         }
 
+        // Debug.Log("Turning On Lamps: " + string.Join(", ", lampCodes) + "");
         foreach (var code in lampCodes)
         {
             foreach (var ledPort in ledPorts)
             {
+                // Debug.Log("Checking Lamp: " + ledPort.name + " with code: " + code + " and received information: " + ledPort.ReceivedInformation);
                 if (ledPort.ReceivedInformation == code)
                 {
                     ledPort.TurnLight(true);
