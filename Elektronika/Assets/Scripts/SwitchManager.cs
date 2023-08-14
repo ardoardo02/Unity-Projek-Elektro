@@ -16,12 +16,9 @@ public class SwitchManager : MonoBehaviour
             foreach (var switchPort in switchPorts)
             {
                 if (switchPort.ConnectedPort != null) {
-                    Debug.Log("Connected");
-                        if(switchPort.IsGroundSwitchActive()) {
-                        Debug.Log("GroundPort Active");
+                    if(switchPort.IsGroundSwitchActive()) {
                         if (switchPort.IsToggleActive && switchPort.ReceivedInformation == step.ToString())
                         {
-                            Debug.Log("Found");
                             found = true;
                             break;
                         }

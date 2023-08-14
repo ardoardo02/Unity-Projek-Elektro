@@ -16,7 +16,7 @@ public class LEDPort : Port
         base.Connect(other);
 
         if (other is ICPort portIC) {
-            if (!string.IsNullOrEmpty(receivedInformation)){
+            if (!string.IsNullOrEmpty(portIC.Information)){
                 receivedInformation = portIC.Information;
                 switchManager.CheckSwitches();
             }
