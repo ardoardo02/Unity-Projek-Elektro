@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MPE;
 using UnityEngine;
 
 public class GroundPort : Port
@@ -13,6 +14,8 @@ public class GroundPort : Port
         
         if(ConnectedPort is GroundSwitchPort groundSwitchPort)
             groundSwitchPort.ActivatePort();
+        else if(ConnectedPort is GroundLEDPort groundLEDPort)
+            groundLEDPort.ActivatePort();
     }
 
     public void Deactivate() {
@@ -20,5 +23,7 @@ public class GroundPort : Port
 
         if(ConnectedPort is GroundSwitchPort groundSwitchPort)
             groundSwitchPort.DeactivatePort();
+        else if(ConnectedPort is GroundLEDPort groundLEDPort)
+            groundLEDPort.DeactivatePort();
     }
 }

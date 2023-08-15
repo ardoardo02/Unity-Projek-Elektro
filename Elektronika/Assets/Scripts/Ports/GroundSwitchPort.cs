@@ -37,6 +37,8 @@ public class GroundSwitchPort : Port
             isActive = false;
             TriggerTurnOffLightEvent?.Invoke();
             relatedGroundSwitchExtra.Deactivate();
+            if(relatedGroundSwitchExtra.ConnectedPort is GroundSwitchPort groundSwitchPort)
+                groundSwitchPort.DeactivatePort();
         }
     }
 

@@ -6,11 +6,22 @@ public class LEDPort : Port
 {
     [Header("LED Settings")]
     [SerializeField] SwitchManager switchManager;
+    [SerializeField, Tooltip("Related Ground LED Port")] GroundLEDPort relatedGroundLEDPort;
     [SerializeField, Tooltip("Related LED/Light Object")] SpriteRenderer lightSpriteRenderer;
 
     string receivedInformation = "";
 
     public string ReceivedInformation { get => receivedInformation; }
+
+    private void Start() {
+        relatedGroundLEDPort.TriggerTurnOffLightEvent += TurnLight;
+        relatedGroundLEDPort.TriggerPortActivatedEvent += CheckSwitch;
+    }
+
+    private void OnDestroy() {
+        relatedGroundLEDPort.TriggerTurnOffLightEvent -= TurnLight;
+        relatedGroundLEDPort.TriggerPortActivatedEvent -= CheckSwitch;
+    }
 
     public override void Connect(Port other) {
         base.Connect(other);
@@ -31,7 +42,7 @@ public class LEDPort : Port
     }
 
     public void TurnLight(bool isOn) {
-        lightSpriteRenderer.color = isOn ? Color.yellow : Color.white;
+        lightSpriteRenderer.color = isOn && IsGroundLEDActive() ? Color.yellow : Color.white;
     }
 
     public void CheckSwitch() {
@@ -44,4 +55,8 @@ public class LEDPort : Port
             }
         }
     }
+
+    public bool IsGroundLEDActive() {
+        return relatedGroundLEDPort.IsActive;
+    }   
 }
