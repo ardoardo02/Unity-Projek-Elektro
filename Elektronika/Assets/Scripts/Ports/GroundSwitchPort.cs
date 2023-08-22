@@ -10,7 +10,7 @@ public class GroundSwitchPort : Port
     bool isActive = false;
 
     public Action TriggerTurnOffLightEvent;
-    public Action TriggerPortActivatedEvent;
+    public Action<bool> TriggerPortActivatedEvent;
     public bool IsActive { get => isActive; }
 
     private void Start() 
@@ -25,7 +25,7 @@ public class GroundSwitchPort : Port
         if(relatedGroundSwitchExtra) {
             isActive = true;
             relatedGroundSwitchExtra.IsActive = true;
-            TriggerPortActivatedEvent?.Invoke();
+            TriggerPortActivatedEvent?.Invoke(true);
             if(relatedGroundSwitchExtra.ConnectedPort is GroundSwitchPort groundSwitchPort)
                 groundSwitchPort.ActivatePort();
         }

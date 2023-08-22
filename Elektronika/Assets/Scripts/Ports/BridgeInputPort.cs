@@ -19,6 +19,10 @@ public class BridgeInputPort : Port
             // Salin informasi jika ini adalah ICPort
             if (other is ICPort icPort) {
                 relatedBridgeOutput.Information = icPort.Information;
+
+                if (icPort.IsActive) {
+                    relatedBridgeOutput.Activate(this);
+                }
             }
         }
     }
@@ -28,8 +32,21 @@ public class BridgeInputPort : Port
 
         if (relatedBridgeOutput != null) {
             relatedBridgeOutput.Information = ""; // Hapus informasi
+            relatedBridgeOutput.Deactivate(this); // Nonaktifkan BridgeOutputPort terkait
             relatedBridgeOutput.gameObject.SetActive(false); // Nonaktifkan BridgeOutputPort terkait
             portManager.DisconnectExistingConnection(relatedBridgeOutput); // Hapus garis yang terhubung dengan BridgeOutputPort
+        }
+    }
+
+    public void Activate() {
+        if (relatedBridgeOutput != null) {
+            relatedBridgeOutput.Activate(this);
+        }
+    }
+
+    public void Deactivate() {
+        if (relatedBridgeOutput != null) {
+            relatedBridgeOutput.Deactivate(this);
         }
     }
 }
