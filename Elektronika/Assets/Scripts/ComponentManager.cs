@@ -9,6 +9,7 @@ public class ComponentManager : MonoBehaviour
     {
         IC_Type1,
         Type2,
+        _74LS148,
         Others
     }
 

@@ -1184,8 +1184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: 5
+  isActive: 0
 --- !u!1 &236579796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,8 +2268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: A1
+  isActive: 0
 --- !u!1 &436738568
 GameObject:
   m_ObjectHideFlags: 0
@@ -3777,8 +3777,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: 6
+  isActive: 0
 --- !u!1 &599508005
 GameObject:
   m_ObjectHideFlags: 0
@@ -7432,8 +7432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: 7
+  isActive: 0
 --- !u!1 &1312873570
 GameObject:
   m_ObjectHideFlags: 0
@@ -7571,14 +7571,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1488256447}
     m_Modifications:
-    - target: {fileID: 761404711109574787, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
-      propertyPath: type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 761404711109574787, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
-      propertyPath: icPortManager
-      value: 
-      objectReference: {fileID: 1869713216}
     - target: {fileID: 1658751776523863969, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
       propertyPath: m_Name
       value: Locked Slot
@@ -7589,11 +7581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1658751776523863972, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.13
+      value: -4.28
       objectReference: {fileID: 0}
     - target: {fileID: 1658751776523863972, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.96
+      value: -2.61
       objectReference: {fileID: 0}
     - target: {fileID: 1658751776523863972, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7626,10 +7618,6 @@ PrefabInstance:
     - target: {fileID: 1658751776523863972, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7261873879907656619, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
-      propertyPath: MinDistance
-      value: 1.0464387
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9004167ab18cd4a4d9192243412ac70e, type: 3}
@@ -8715,11 +8703,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.89
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: -3.65
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9913,8 +9901,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: Ground
+  isActive: 0
 --- !u!61 &1707198097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10778,7 +10766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1825488901
 Transform:
   m_ObjectHideFlags: 0
@@ -10955,15 +10943,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vcc_ICPort: {fileID: 1880199035}
   groundICPort: {fileID: 1207074804}
-  ports:
+  iCPorts:
   - {fileID: 1303966018}
   - {fileID: 582917731}
   - {fileID: 212061102}
   - {fileID: 1998546377}
-  - {fileID: 1965872751}
-  - {fileID: 421517526}
-  - {fileID: 1707198096}
-  - {fileID: 2030807861}
 --- !u!4 &1869713217
 Transform:
   m_ObjectHideFlags: 0
@@ -11741,8 +11725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: A0
+  isActive: 0
 --- !u!1 &1998546373
 GameObject:
   m_ObjectHideFlags: 0
@@ -11868,8 +11852,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: 4
+  isActive: 0
 --- !u!1 &2025121152
 GameObject:
   m_ObjectHideFlags: 0
@@ -12052,8 +12036,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedLine: {fileID: 0}
-  information: 
-  portManager: {fileID: 600776721}
+  information: VCC
+  isActive: 0
 --- !u!61 &2030807862
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12416,11 +12400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.12
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.17
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.z

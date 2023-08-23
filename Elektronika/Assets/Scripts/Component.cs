@@ -15,6 +15,8 @@ public class Component : MonoBehaviour
     SpriteRenderer spriteRenderer;
     ComponentSlot currentSlot;
 
+    public ComponentManager.ComponentType Type { get => type; }
+
     void Awake() {
         originalPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();

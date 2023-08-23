@@ -7,10 +7,18 @@ public class ComponentSlot : MonoBehaviour
     [SerializeField] ComponentManager.ComponentType type;
     [SerializeField] ComponentManager.SlotType slotType;
 
+    Component currentComponent = null;
+
     public ComponentManager.ComponentType Type { get => type; }
-    public Component CurrentComponent { get; private set; }
+    public Component CurrentComponent { get => currentComponent; }
 
     public void SetCurrentComponent(Component component) {
-        CurrentComponent = component;
+        currentComponent = component;
+
+        // Update IC Port information based on the component type
+        // if (component != null && component.Type == type)
+        // {
+        //     icPortManager.UpdateICPort(type);
+        // }
     }
 }

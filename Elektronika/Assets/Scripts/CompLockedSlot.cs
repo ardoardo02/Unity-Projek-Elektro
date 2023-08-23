@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CompLockedSlot : ComponentSlot
 {
+    [SerializeField] ICPortManager icPortManager;
     [SerializeField] GameObject toggleButton;
     [SerializeField] bool isLocked;
 
@@ -25,6 +26,7 @@ public class CompLockedSlot : ComponentSlot
     private void Start() {
         spriteRenderer.color = new Color32(94, 94, 94, 116);
         isLocked = true;
+        UpdateICPortInformation(); // Update ICPorts based on the initial locked state
     }
 
     private void OnMouseEnter() {
@@ -39,5 +41,19 @@ public class CompLockedSlot : ComponentSlot
         audioSource.Play();
         spriteRenderer.color = isLocked ? originalColor : new Color32(94, 94, 94, 116);
         isLocked = !isLocked;
+
+        UpdateICPortInformation(); // Update ICPorts based on the new locked state
+    }
+
+    private void UpdateICPortInformation()
+    {
+        if (isLocked && CurrentComponent != null && CurrentComponent.Type == Type)
+        {
+            icPortManager.UpdateICPort(Type); // Change ICPorts information based on component type
+        }
+        else
+        {
+            icPortManager.RemoveAllICPortInfo(); // Remove all information on ICPorts
+        }
     }
 }

@@ -6,6 +6,7 @@ public class ICPort : Port
 {
     [Header("Connection Settings")]
     [SerializeField, Tooltip("Connected Line Renderer")] string information; // Informasi untuk tipe IC
+    [SerializeField] PortManager portManager;
     
     bool isActive = false;
 
@@ -24,6 +25,14 @@ public class ICPort : Port
 
         if (connectedPort is BridgeInputPort bridgeInputPort)
             bridgeInputPort.Deactivate();
+    }
+
+    public void UpdateInformation(string newInformation) {
+        information = newInformation;
+    }
+
+    public void DisconnectConnection() {
+        portManager.DisconnectExistingConnection(this);
     }
 }
 
