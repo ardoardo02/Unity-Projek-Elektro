@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ComponentSlot : MonoBehaviour
 {
+    [Header("Component Types")]
     [SerializeField] ComponentManager.ComponentType type;
     [SerializeField] ComponentManager.SlotType slotType;
 

@@ -20,7 +20,7 @@ public class ResistorOutputPort : Port
     public override bool CanConnect(Port other) {
         // Cegah terhubung dengan Port yang sedang terhubung dengan ResistorInputPort
         if (other.GetConnectedPortType() == typeof(ResistorInputPort) ||
-            other is ResistorInputPort resistorInputPort) {
+            other is ResistorInputPort) {
             return false;
         }
 

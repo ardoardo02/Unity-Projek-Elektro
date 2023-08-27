@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 225
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,7 +139,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: SevenSegmentBG
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 587
+        width: 200
+        height: 266
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30c25b5933f43b246a474c923d063998
+      internalID: -350519191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BluePort
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 804
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ba53f9bd2ca36a4f829be850bc25588
+      internalID: -1147898610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RedPort
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 724
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b03350f1f5ce4104ba4627e1f7438460
+      internalID: -59371136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrayPort
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 644
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c49b958a38ac73e4981d575260d4a5a6
+      internalID: 1791987988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhitePort
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 560
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6a04bc1c8afbf469e3aa1236186ea8
+      internalID: -1407407191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallSlot
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 415
+        width: 370
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b511379e8585af7438f81bbb9762f1a8
+      internalID: 1853280449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchOff
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 472
+        width: 44
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b79f40d045ae49418a527b7f079e6e1
+      internalID: 751736067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchOn
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 407
+        width: 44
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29a7af241068b054db876888fc57d5b4
+      internalID: -1647280155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSlot
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 180
+        width: 520
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043cddde9f9cdca48bb611a1d8662701
+      internalID: 1774059700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlotLockOpen
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 107
+        width: 134
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de50412815519b4bb498a6df07a7968
+      internalID: 1482393790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightOn
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 17
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70e698fcdebc52e4f8e28f7bb2d93a62
+      internalID: 1042569942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IC_74LS148
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 83
+        width: 152
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b40f99a4e09d1124a9962cc58817c35a
+      internalID: -279528605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlotLockClose
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 27
+        width: 48
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffd7f7f98134784cb082320c0ee6e37
+      internalID: 1831866081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 10
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d51c60d77276b14da79b2b2dc957bf2
+      internalID: 2011301418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +444,29 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BigSlot: 1774059700
+      BluePort: -1147898610
+      GrayPort: 1791987988
+      IC_74LS148: -279528605
+      Light: 2011301418
+      LightOn: 1042569942
+      RedPort: -59371136
+      SevenSegmentBG: -350519191
+      SlotLockClose: 1831866081
+      SlotLockOpen: 1482393790
+      SmallSlot: 1853280449
+      SwitchOff: 751736067
+      SwitchOn: -1647280155
+      WhitePort: -1407407191
+      component_1: 1152100067
+      component_10: -114674203
+      component_11: -495262803
+      component_2: 1687597877
+      component_3: 661647321
+      component_5: 1391656900
+      component_7: -42530086
+      component_8: 861625863
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

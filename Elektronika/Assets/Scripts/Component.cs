@@ -50,17 +50,17 @@ public class Component : MonoBehaviour
 
         foreach (Transform slot in slotParent) { // Check if the component is near a slot
             if (slot.TryGetComponent<ComponentSlot>(out var slotComponent) && slotComponent.CurrentComponent == null) {
-                if (Vector2.Distance(transform.position, slot.position) < 2) {
+                if (Vector2.Distance(transform.position, slot.position) < 1) {
                     if (IsSlotLocked(slotComponent)) {
                         transform.position = originalPos;
                         return;
                     }
 
-                    transform.position = slot.position;
+                    transform.position = new Vector2(slot.position.x + .11f, slot.position.y);
                     slotComponent.SetCurrentComponent(this);
                     currentSlot = slotComponent;
 
-                    spriteRenderer.color = slotComponent.Type == type ? Color.green : Color.red;
+                    // spriteRenderer.color = slotComponent.Type == type ? Color.green : Color.red;
 
                     return;
                 }

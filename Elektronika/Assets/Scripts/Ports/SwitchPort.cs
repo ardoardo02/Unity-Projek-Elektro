@@ -35,7 +35,7 @@ public class SwitchPort : Port
             // Aktifkan Toggle jika menerima informasi
             if (!string.IsNullOrEmpty(receivedInformation) && IsSwitchRelatedActive(other)) {
                 Debug.Log("Connect Activate Toggle");
-                toggleObject.ToggleSwitch(true);
+                toggleObject.EnableSwitch(true);
             }
         }
     }
@@ -50,21 +50,21 @@ public class SwitchPort : Port
 
     public void ToggleSwitch() {
         isToggleActive = !isToggleActive;
-        toggleObject.ChangeColor(isToggleActive ? Color.green : Color.white);
+        toggleObject.ToggleSwitch(isToggleActive);
         switchManager.CheckSwitches();
     }
 
     public void TurnOnSwitch(bool isGround = false) {
         if (isGround && connectedPort is BridgeOutputPort bridgeOutputPort && bridgeOutputPort.IsActive)
-            toggleObject.ToggleSwitch(true);
+            toggleObject.EnableSwitch(true);
         else if (IsSwitchRelatedActive())
-            toggleObject.ToggleSwitch(true);
+            toggleObject.EnableSwitch(true);
     }
 
     public void TurnOffSwitch() {
         isToggleActive = false;
+        toggleObject.EnableSwitch(false);
         toggleObject.ToggleSwitch(false);
-        toggleObject.ChangeColor(Color.white);
         switchManager.CheckSwitches();
     }
 

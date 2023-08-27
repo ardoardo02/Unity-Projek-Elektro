@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7300443199622288706}
-  - component: {fileID: 3455151997282539800}
   - component: {fileID: 1559580533962400968}
+  - component: {fileID: 3455151997282539800}
   - component: {fileID: 4316567596097028134}
   - component: {fileID: 8554142952084412043}
   m_Layer: 0
@@ -28,13 +28,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6222611298026045505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3, y: 1.69, z: 0}
-  m_LocalScale: {x: 4.2911, y: 1.8852, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559580533962400968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6222611298026045505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f46040258a174c41856768d5306908e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  slotParent: {fileID: 0}
+  audioSource: {fileID: 8554142952084412043}
+  clip_pickUp: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  clip_drop: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
 --- !u!212 &3455151997282539800
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -87,23 +104,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1559580533962400968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6222611298026045505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f46040258a174c41856768d5306908e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  slotParent: {fileID: 0}
-  audioSource: {fileID: 8554142952084412043}
-  clip_pickUp: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
-  clip_drop: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
 --- !u!61 &4316567596097028134
 BoxCollider2D:
   m_ObjectHideFlags: 0

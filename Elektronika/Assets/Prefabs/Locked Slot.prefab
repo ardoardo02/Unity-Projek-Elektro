@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746089039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.636, y: 0.337, z: 0}
-  m_LocalScale: {x: 0.216, y: 0.2062, z: 1}
+  m_LocalPosition: {x: -0.937, y: -0.2335, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1658751776523863972}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -1481839481, guid: 03cf8ff5546635a4fb2eed6478a48b43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,11 +101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7683295754264592484, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683295754264592484, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.07
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683295754264592484, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: slotType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7683295754264592487, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1853280449, guid: 520e31ecad35dd74099fcac35445a436, type: 3}
     m_RemovedComponents:
     - {fileID: 7683295754264592486, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2894e6f583505af46afeaced5daf218e, type: 3}
@@ -164,18 +168,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.63664573, y: 0.3379289}
+  m_Offset: {x: -0.8918393, y: -0.23134014}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.6444445, y: 0.5777778}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2161144, y: 0.20924662}
+  m_Size: {x: 0.7389051, y: 0.18676126}
   m_EdgeRadius: 0
 --- !u!82 &7261873879907656619
 AudioSource:
@@ -287,8 +291,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   slotType: 1
+  sprite_lockOpen: {fileID: -345884988, guid: 03cf8ff5546635a4fb2eed6478a48b43, type: 3}
+  sprite_lockClose: {fileID: -1481839481, guid: 03cf8ff5546635a4fb2eed6478a48b43, type: 3}
+  icPortManager: {fileID: 0}
   toggleButton: {fileID: 746089039}
-  isLocked: 0
 --- !u!4 &1658751776523863972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7683295754264592484, guid: 2894e6f583505af46afeaced5daf218e, type: 3}

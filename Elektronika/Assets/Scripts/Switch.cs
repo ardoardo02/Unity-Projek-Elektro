@@ -4,6 +4,9 @@ using UnityEngine;
 public class Switch : MonoBehaviour
 {
     // [SerializeField] private SwitchManager switchManager;
+    [SerializeField] Sprite sprite_switchOn;
+    [SerializeField] Sprite sprite_switchOff;
+
     bool isEnabled;
     SpriteRenderer spriteRenderer;
 
@@ -11,7 +14,7 @@ public class Switch : MonoBehaviour
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ToggleSwitch(false);
+        EnableSwitch(false);
     }
 
     private void OnMouseEnter() {
@@ -30,13 +33,14 @@ public class Switch : MonoBehaviour
         TriggerClickEvent?.Invoke();
     }
 
-    public void ToggleSwitch(bool isOn)
+    public void EnableSwitch(bool isOn)
     {
         isEnabled = isOn;
         spriteRenderer.color = isEnabled ? Color.white : new Color32(60, 60, 60, 255);
     }
 
-    public void ChangeColor(Color color) {
-        spriteRenderer.material.color = color;
+    public void ToggleSwitch(bool isOn) {
+        spriteRenderer.sprite = isOn ? sprite_switchOn : sprite_switchOff;
+        // spriteRenderer.material.color = color;
     }
 }

@@ -4,27 +4,31 @@ using UnityEngine;
 
 public class CompLockedSlot : ComponentSlot
 {
+    [Header("References")]
+    [SerializeField] Sprite sprite_lockOpen;
+    [SerializeField] Sprite sprite_lockClose;
     [SerializeField] ICPortManager icPortManager;
     [SerializeField] GameObject toggleButton;
-    [SerializeField] bool isLocked;
-
-    SpriteRenderer spriteRenderer;
+    
+    bool isLocked;
+    // SpriteRenderer spriteRenderer;
     SpriteRenderer toggleSpriteRenderer;
-    Color originalColor;
+    // Color originalColor;
     AudioSource audioSource;
 
     public bool IsLocked => isLocked; //public bool IsLocked { get => isLocked; }
 
     private void Awake() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
+        // spriteRenderer = GetComponent<SpriteRenderer>();
+        // originalColor = spriteRenderer.color;
         audioSource = GetComponent<AudioSource>();
 
         toggleSpriteRenderer = toggleButton.GetComponent<SpriteRenderer>();
     }
     
     private void Start() {
-        spriteRenderer.color = new Color32(94, 94, 94, 116);
+        // spriteRenderer.color = new Color32(94, 94, 94, 116);
+        toggleSpriteRenderer.sprite = sprite_lockClose;
         isLocked = true;
         UpdateICPortInformation(); // Update ICPorts based on the initial locked state
     }
@@ -39,8 +43,9 @@ public class CompLockedSlot : ComponentSlot
 
     private void OnMouseDown() {
         audioSource.Play();
-        spriteRenderer.color = isLocked ? originalColor : new Color32(94, 94, 94, 116);
+        // spriteRenderer.color = isLocked ? originalColor : new Color32(94, 94, 94, 116);
         isLocked = !isLocked;
+        toggleSpriteRenderer.sprite = isLocked ? sprite_lockClose : sprite_lockOpen;
 
         UpdateICPortInformation(); // Update ICPorts based on the new locked state
     }

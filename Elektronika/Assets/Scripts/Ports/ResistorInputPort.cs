@@ -34,7 +34,8 @@ public class ResistorInputPort : Port
 
     public override bool CanConnect(Port other) {
         if (other.GetConnectedPortType() == typeof(ResistorOutputPort) || 
-            (relatedResistorOutput != null && other == relatedResistorOutput)) {
+            // (relatedResistorOutput != null && other == relatedResistorOutput)) {
+            other is ResistorOutputPort) {
             return false;
         }
 
