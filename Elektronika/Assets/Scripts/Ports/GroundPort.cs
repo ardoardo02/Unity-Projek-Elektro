@@ -16,6 +16,9 @@ public class GroundPort : Port
             groundSwitchPort.ActivatePort();
         else if(ConnectedPort is GroundLEDPort groundLEDPort)
             groundLEDPort.ActivatePort();
+        else if(ConnectedPort is ICPort iCPort && 
+                (iCPort.Information == "Ground" || iCPort.Information == "GS" || iCPort.Information == "EO" || iCPort.Information == "E1"))
+            iCPort.UpdateActivateIC(true, this);
     }
 
     public void Deactivate() {
@@ -25,5 +28,7 @@ public class GroundPort : Port
             groundSwitchPort.DeactivatePort();
         else if(ConnectedPort is GroundLEDPort groundLEDPort)
             groundLEDPort.DeactivatePort();
+        else if(ConnectedPort is ICPort iCPort)
+            iCPort.UpdateActivateIC(false, this);
     }
 }

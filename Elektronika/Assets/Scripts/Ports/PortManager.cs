@@ -1,13 +1,19 @@
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 public class PortManager : MonoBehaviour
 {
     [Header("Line Settings")]
     [SerializeField] LineRenderer linePrefab;
+    [SerializeField] TMP_Text modeText;
     
     Port selectedPort;
     LineRenderer currentLine;
+    Color lineColor = Color.red;
     List<Connection> connections = new List<Connection>();
 
     void Update()
@@ -46,7 +52,12 @@ public class PortManager : MonoBehaviour
     private void StartDrawingLine() {
         currentLine = Instantiate(linePrefab, transform);
         currentLine.positionCount = 2;
+        currentLine.startColor = lineColor;
+        currentLine.endColor = lineColor;
         currentLine.SetPosition(0, selectedPort.transform.position);
+        var startLine = currentLine.transform.Find("Start");
+        startLine.position = selectedPort.transform.position;
+        startLine.GetComponent<SpriteRenderer>().color = lineColor;
     }
 
     private void UpdateLineEndPosition() {
@@ -66,6 +77,10 @@ public class PortManager : MonoBehaviour
 
                 // Atur endPosition garis ke posisi tengah target port
                 currentLine.SetPosition(1, targetPort.transform.position);
+                var endLine = currentLine.transform.Find("End");
+                endLine.position = targetPort.transform.position;
+                endLine.GetComponent<SpriteRenderer>().color = lineColor;
+                endLine.gameObject.SetActive(true);
 
                 selectedPort.Connect(targetPort);
                 targetPort.Connect(selectedPort);
@@ -98,5 +113,11 @@ public class PortManager : MonoBehaviour
             connectionToRemove.PortB.Disconnect();
             connections.Remove(connectionToRemove);
         }
+    }
+
+    public void ChangeLineColor(string color) {
+        lineColor = ColorUtility.TryParseHtmlString(color, out Color newColor) ? newColor : Color.red;
+        modeText.color = lineColor;
+        // lineColor = color == "red" ? Color.red : color == "green" ? new Color(0, 255, 0) : Color.blue;
     }
 }

@@ -13,6 +13,8 @@ public class VCCPort : Port
 
         if(connectedPort is PowerBridgePort powerBridgePort)
             powerBridgePort.Activate();
+        else if(connectedPort is ICPort iCPort && iCPort.Information == "VCC")
+            iCPort.UpdateActivateIC(true, this);
     }
 
     public void Deactivate() {
@@ -20,5 +22,7 @@ public class VCCPort : Port
 
         if(connectedPort is PowerBridgePort powerBridgePort)
             powerBridgePort.Deactivate();
+        else if(connectedPort is ICPort iCPort)
+            iCPort.UpdateActivateIC(false, this);
     }
 }

@@ -9,14 +9,23 @@ public class CompLockedSlot : ComponentSlot
     [SerializeField] Sprite sprite_lockClose;
     [SerializeField] ICPortManager icPortManager;
     [SerializeField] GameObject toggleButton;
+    [Header("Collider")]
+    [SerializeField] BoxCollider2D toggleCollider;
+    [SerializeField] BoxCollider2D leftCollider;
+    [SerializeField] BoxCollider2D midCollider;
+    [SerializeField] BoxCollider2D rightCollider;
     
     bool isLocked;
+    string icPos;
     // SpriteRenderer spriteRenderer;
     SpriteRenderer toggleSpriteRenderer;
     // Color originalColor;
     AudioSource audioSource;
 
     public bool IsLocked => isLocked; //public bool IsLocked { get => isLocked; }
+    public BoxCollider2D LeftCollider { get => leftCollider; }
+    public BoxCollider2D MidCollider { get => midCollider; }
+    public BoxCollider2D RightCollider { get => rightCollider; }
 
     private void Awake() {
         // spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,32 +42,53 @@ public class CompLockedSlot : ComponentSlot
         UpdateICPortInformation(); // Update ICPorts based on the initial locked state
     }
 
+    /*
     private void OnMouseEnter() {
-        toggleSpriteRenderer.color = Color.gray;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.zero);
+
+        if (hit.collider != null && hit.collider == toggleCollider)
+            toggleSpriteRenderer.color = Color.gray;
     }
 
     private void OnMouseExit() {
         toggleSpriteRenderer.color = Color.white;
     }
+    */
 
     private void OnMouseDown() {
-        audioSource.Play();
-        // spriteRenderer.color = isLocked ? originalColor : new Color32(94, 94, 94, 116);
-        isLocked = !isLocked;
-        toggleSpriteRenderer.sprite = isLocked ? sprite_lockClose : sprite_lockOpen;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);    
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector2.zero);
 
-        UpdateICPortInformation(); // Update ICPorts based on the new locked state
+        if (hit.collider != null && hit.collider == toggleCollider){
+            audioSource.Play();
+            // spriteRenderer.color = isLocked ? originalColor : new Color32(94, 94, 94, 116);
+            isLocked = !isLocked;
+            toggleSpriteRenderer.sprite = isLocked ? sprite_lockClose : sprite_lockOpen;
+
+            UpdateICPortInformation(); // Update ICPorts based on the new locked state
+        }
     }
 
     private void UpdateICPortInformation()
     {
         if (isLocked && CurrentComponent != null && CurrentComponent.Type == Type)
         {
-            icPortManager.UpdateICPort(Type); // Change ICPorts information based on component type
+            icPortManager.UpdateICPort(Type, icPos); // Change ICPorts information based on component type
         }
         else
         {
             icPortManager.RemoveAllICPortInfo(); // Remove all information on ICPorts
         }
+    }
+
+    public void SetColliderActive(bool active) {
+        leftCollider.enabled = active;
+        midCollider.enabled = active;
+        rightCollider.enabled = active;
+    }
+
+    public void SetICPos(string icPos) {
+        this.icPos = icPos;
     }
 }
