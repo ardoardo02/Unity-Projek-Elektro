@@ -10,7 +10,7 @@ public class PowerGroundPort : Port
     {
         base.Connect(other);
 
-        if(other is PowerPort) {
+        if(other is PowerPort powerPort && powerPort.IsPowerActive) {
             foreach (var groundPort in groundPorts) {
                 groundPort.Activate();
             }
@@ -23,6 +23,18 @@ public class PowerGroundPort : Port
 
         foreach (var groundPort in groundPorts) {
             groundPort.Deactivate();
+        }
+    }
+
+    public void TogglePower(bool isOn) {
+        if (isOn) {
+            foreach (var groundPort in groundPorts) {
+                groundPort.Activate();
+            }
+        } else {
+            foreach (var groundPort in groundPorts) {
+                groundPort.Deactivate();
+            }
         }
     }
 }

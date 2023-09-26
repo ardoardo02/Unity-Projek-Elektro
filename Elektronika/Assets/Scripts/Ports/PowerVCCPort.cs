@@ -10,7 +10,7 @@ public class PowerVCCPort : Port
     {
         base.Connect(port);
 
-        if (port is PowerPort){
+        if (port is PowerPort powerPort && powerPort.IsPowerActive){
             foreach (VCCPort vccPort in vccPorts){
                 vccPort.Activate();
             }
@@ -23,6 +23,18 @@ public class PowerVCCPort : Port
         
         foreach (VCCPort vccPort in vccPorts){
             vccPort.Deactivate();
+        }
+    }
+
+    public void TogglePower(bool isOn) {
+        if (isOn) {
+            foreach (VCCPort vccPort in vccPorts){
+                vccPort.Activate();
+            }
+        } else {
+            foreach (VCCPort vccPort in vccPorts){
+                vccPort.Deactivate();
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ public class ICPortManager : MonoBehaviour
             isGroundActive = true;
         } else if((port is GroundICPort || port is GroundPort) && icInfo == "GS") {
             isGSActive = true;
-        } else if((port is GroundICPort || port is GroundPort) && icInfo == "EO") {
+        } else if((port is VCC_ICPort || port is VCCPort) && icInfo == "EO") {
             isEOActive = true;
         } else if((port is GroundICPort || port is GroundPort) && icInfo == "E1") {
             isE1Active = true;
@@ -71,7 +71,7 @@ public class ICPortManager : MonoBehaviour
             isGroundActive = false;
         } else if((port is GroundICPort || port is GroundPort) && icInfo == "GS") {
             isGSActive = false;
-        } else if((port is GroundICPort || port is GroundPort) && icInfo == "EO") {
+        } else if((port is VCC_ICPort || port is VCCPort) && icInfo == "EO") {
             isEOActive = false;
         } else if((port is GroundICPort || port is GroundPort) && icInfo == "E1") {
             isE1Active = false;

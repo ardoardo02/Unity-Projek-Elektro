@@ -17,7 +17,7 @@ public class GroundPort : Port
         else if(ConnectedPort is GroundLEDPort groundLEDPort)
             groundLEDPort.ActivatePort();
         else if(ConnectedPort is ICPort iCPort && 
-                (iCPort.Information == "Ground" || iCPort.Information == "GS" || iCPort.Information == "EO" || iCPort.Information == "E1"))
+                (iCPort.Information == "Ground" || iCPort.Information == "GS" || iCPort.Information == "E1"))
             iCPort.UpdateActivateIC(true, this);
     }
 

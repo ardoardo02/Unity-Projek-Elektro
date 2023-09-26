@@ -31,17 +31,15 @@ public class ICPort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if ((information == "VCC" && other is VCCPort vCCPort && vCCPort.IsActive) ||
-            ((information == "Ground" || information == "GS" || information == "EO" || information == "E1") && 
-            other is GroundPort groundPort && groundPort.IsActive)) {
+        if (((information == "VCC" || information == "EO")&& other is VCCPort vCCPort && vCCPort.IsActive) ||
+            ((information == "Ground" || information == "GS" || information == "E1") && other is GroundPort groundPort && groundPort.IsActive)) {
             icPortManager.Activate(other, information);
         }
     }
 
     public override void Disconnect() {
-        if ((information == "VCC" && connectedPort is VCCPort) ||
-            ((information == "Ground" || information == "GS" || information == "EO" || information == "E1") && 
-            connectedPort is GroundPort)) {
+        if (((information == "VCC" || information == "EO") && connectedPort is VCCPort) ||
+            ((information == "Ground" || information == "GS" || information == "E1") && connectedPort is GroundPort)) {
             icPortManager.Deactivate(connectedPort, information);
         }
 
@@ -60,9 +58,8 @@ public class ICPort : Port
     }
 
     public void DisconnectConnection() {
-        if ((information == "VCC" && connectedPort is VCCPort) ||
-            ((information == "Ground" || information == "GS" || information == "EO" || information == "E1") && 
-            connectedPort is GroundPort)) {
+        if (((information == "VCC" || information == "EO") && connectedPort is VCCPort) ||
+            ((information == "Ground" || information == "GS" || information == "E1") && connectedPort is GroundPort)) {
             icPortManager.Deactivate(connectedPort, information);
         }
 
