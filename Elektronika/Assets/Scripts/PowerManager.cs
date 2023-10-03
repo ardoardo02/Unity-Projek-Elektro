@@ -12,7 +12,7 @@ public class PowerManager : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private void Awake() {
-        spriteRenderer = transform.Find("Toggle").GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnMouseDown() {
@@ -21,6 +21,7 @@ public class PowerManager : MonoBehaviour
 
     private void TogglePower(bool isOn) {
         isPowerActive = isOn;
+        GameManager.Instance.CheckPowerSwitch(isOn);
         spriteRenderer.sprite = isOn ? sprite_toggleOn : sprite_toggleOff;
         foreach (var powerPort in powerPorts)
         {

@@ -10,15 +10,23 @@ public class PowerGroundPort : Port
     {
         base.Connect(other);
 
-        if(other is PowerPort powerPort && powerPort.IsPowerActive) {
-            foreach (var groundPort in groundPorts) {
-                groundPort.Activate();
+        if(other is PowerPort powerPort) {
+            GameManager.Instance.CheckPort(this, true);
+            if (powerPort.IsPowerActive){
+                foreach (var groundPort in groundPorts) {
+                    groundPort.Activate();
+                }
             }
         }
+        else GameManager.Instance.AddMistake();
     }
 
     public override void Disconnect()
     {
+        if (connectedPort is PowerPort){
+            GameManager.Instance.CheckPort(this, false);
+        }
+
         base.Disconnect();
 
         foreach (var groundPort in groundPorts) {

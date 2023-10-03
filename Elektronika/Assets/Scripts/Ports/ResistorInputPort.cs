@@ -13,13 +13,13 @@ public class ResistorInputPort : Port
 
         if (relatedResistorOutput != null) {
             // Salin informasi jika ini adalah ICPort
-            if (other is ICPort portIC) {
-                if(!string.IsNullOrEmpty(portIC.Information)){
-                    relatedResistorOutput.Information = portIC.Information;
-                    relatedResistorOutput.CheckSwitch();
-                    // Debug.Log("ResistorInputPort: Check Switch");
-                }
+            if (other is ICPort portIC && !string.IsNullOrEmpty(portIC.Information) && portIC.Information[0] == 'A'){
+                relatedResistorOutput.Information = portIC.Information;
+                relatedResistorOutput.CheckSwitch();
+                GameManager.Instance.CheckPort(this, true);
+                // Debug.Log("ResistorInputPort: Check Switch");
             }
+            else GameManager.Instance.AddMistake();
         }
     }
 
@@ -27,7 +27,10 @@ public class ResistorInputPort : Port
         base.Disconnect();
 
         if (relatedResistorOutput != null) {
-            relatedResistorOutput.Information = ""; // Hapus informasi
+            if (relatedResistorOutput.Information != "") {
+                GameManager.Instance.CheckPort(this, false);
+                relatedResistorOutput.Information = ""; // Hapus informasi
+            }
             portManager.DisconnectExistingConnection(relatedResistorOutput); // Hapus garis yang terhubung dengan ResistorOutputPort
         }
     }

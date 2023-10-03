@@ -23,6 +23,14 @@ public class BridgeOutputPort : Port
         return base.CanConnect(other) && gameObject.activeSelf;
     }
 
+    public override void Connect(Port other) 
+    {
+        base.Connect(other);
+        
+        if (other is SwitchPort) return;
+        else GameManager.Instance.AddMistake();
+    }
+
     public void Activate(Port port) {
         if (port is PowerBridgePort) {
             isPowerActive = true;

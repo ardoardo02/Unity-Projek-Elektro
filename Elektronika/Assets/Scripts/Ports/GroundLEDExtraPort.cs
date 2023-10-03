@@ -13,6 +13,14 @@ public class GroundLEDExtraPort : Port
         relatedGroundLEDPort = GetComponentInParent<GroundLEDPort>();
     }
 
+    public override void Connect(Port other) 
+    {
+        base.Connect(other);
+        
+        if (other is GroundLEDPort) return;
+        else GameManager.Instance.AddMistake();
+    }
+
     public void Deactivate() {
         isActive = false;
     }

@@ -12,14 +12,20 @@ public class PowerBridgePort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if (other is VCCPort vccPort && vccPort.IsActive) {
-            Activate();
+        if (other is VCCPort vccPort) {
+            GameManager.Instance.CheckPort(this, true);
+            if (vccPort.IsActive)
+                Activate();
         }
+        else GameManager.Instance.AddMistake();
     }
 
     public override void Disconnect() {
-        base.Disconnect();
+        if (connectedPort is VCCPort) {
+            GameManager.Instance.CheckPort(this, false);
+        }
 
+        base.Disconnect();
         Deactivate();
     }
 

@@ -31,9 +31,17 @@ public class ICPort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if (((information == "VCC" || information == "EO")&& other is VCCPort vCCPort && vCCPort.IsActive) ||
-            ((information == "Ground" || information == "GS" || information == "E1") && other is GroundPort groundPort && groundPort.IsActive)) {
-            icPortManager.Activate(other, information);
+        // if (((information == "VCC" || information == "EO") && other is VCCPort vCCPort && vCCPort.IsActive) ||
+        //     ((information == "Ground" || information == "GS" || information == "E1") && other is GroundPort groundPort && groundPort.IsActive)) {
+        if (((information == "VCC" || information == "EO") && other is VCCPort) ||
+            ((information == "Ground" || information == "GS" || information == "E1") && other is GroundPort)) {
+            GameManager.Instance.CheckPort(this, true);
+
+            if((other is VCCPort vCCPort && vCCPort.IsActive) || (other is GroundPort groundPort && groundPort.IsActive))
+                icPortManager.Activate(other, information);
+        }
+        else if(information == "VCC" || information == "EO" || information == "Ground" || information == "GS" || information == "E1" || information == "") {
+            GameManager.Instance.AddMistake();
         }
     }
 
@@ -41,6 +49,7 @@ public class ICPort : Port
         if (((information == "VCC" || information == "EO") && connectedPort is VCCPort) ||
             ((information == "Ground" || information == "GS" || information == "E1") && connectedPort is GroundPort)) {
             icPortManager.Deactivate(connectedPort, information);
+            GameManager.Instance.CheckPort(this, false);
         }
 
         base.Disconnect();

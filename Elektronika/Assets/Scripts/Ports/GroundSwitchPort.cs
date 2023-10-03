@@ -48,16 +48,23 @@ public class GroundSwitchPort : Port
         
         if(relatedGroundSwitchExtra) {
             relatedGroundSwitchExtra.gameObject.SetActive(true);
-
-            if ((other is GroundPort groundPort && groundPort.IsActive) ||
-                (other is GroundSwitchExtraPort groundSwitchExtraPort && groundSwitchExtraPort.IsActive)) {
-                ActivatePort();
+            
+            if (other is GroundPort || other is GroundSwitchExtraPort){
+                GameManager.Instance.CheckPort(this, true);
+                if ((other is GroundPort groundPort && groundPort.IsActive) ||
+                    (other is GroundSwitchExtraPort groundSwitchExtraPort && groundSwitchExtraPort.IsActive)) {
+                    ActivatePort();
+                }
             }
+            else GameManager.Instance.AddMistake();
         }
     }
 
     public override void Disconnect() 
     {
+        if (connectedPort is GroundPort || connectedPort is GroundSwitchExtraPort)
+            GameManager.Instance.CheckPort(this, false);
+
         base.Disconnect();
         
         // Nonaktifkan relatedGroundSwitchExtra saat terputus

@@ -10,15 +10,23 @@ public class PowerVCCPort : Port
     {
         base.Connect(port);
 
-        if (port is PowerPort powerPort && powerPort.IsPowerActive){
-            foreach (VCCPort vccPort in vccPorts){
-                vccPort.Activate();
+        if (port is PowerPort powerPort){
+            GameManager.Instance.CheckPort(this, true);
+            if ( powerPort.IsPowerActive){
+                foreach (VCCPort vccPort in vccPorts){
+                    vccPort.Activate();
+                }
             }
         }
+        else GameManager.Instance.AddMistake();
     }
 
     public override void Disconnect()
     {
+        if (connectedPort is PowerPort){
+            GameManager.Instance.CheckPort(this, false);
+        }
+
         base.Disconnect();
         
         foreach (VCCPort vccPort in vccPorts){

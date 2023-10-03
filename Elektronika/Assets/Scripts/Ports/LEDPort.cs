@@ -30,14 +30,20 @@ public class LEDPort : Port
             if (!string.IsNullOrEmpty(resistorOutputPort.Information)){
                 receivedInformation = resistorOutputPort.Information;
                 switchManager.CheckSwitches();
+                GameManager.Instance.CheckPort(this, true);
             }
+            else GameManager.Instance.AddMistake();
         }
+        else GameManager.Instance.AddMistake();
     }
 
     public override void Disconnect() {
         base.Disconnect();
 
-        receivedInformation = "";
+        if (!string.IsNullOrEmpty(receivedInformation)){
+            GameManager.Instance.CheckPort(this, false);
+            receivedInformation = "";
+        }
         TurnLight(false);
     }
 

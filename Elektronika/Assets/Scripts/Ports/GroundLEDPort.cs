@@ -48,15 +48,22 @@ public class GroundLEDPort : Port
         if(relatedGroundLEDExtra) {
             relatedGroundLEDExtra.gameObject.SetActive(true);
 
-            if ((other is GroundPort groundPort && groundPort.IsActive) ||
-                (other is GroundLEDExtraPort groundLEDExtraPort && groundLEDExtraPort.IsActive)) {
-                ActivatePort();
+            if(other is GroundPort || other is GroundLEDExtraPort) {
+                GameManager.Instance.CheckPort(this, true);
+                if ((other is GroundPort groundPort && groundPort.IsActive) ||
+                    (other is GroundLEDExtraPort groundLEDExtraPort && groundLEDExtraPort.IsActive)) {
+                    ActivatePort();
+                }
             }
+            else GameManager.Instance.AddMistake();
         }
     }
 
     public override void Disconnect() 
     {
+        if (connectedPort is GroundPort || connectedPort is GroundLEDExtraPort)
+            GameManager.Instance.CheckPort(this, false);
+
         base.Disconnect();
         
         if(relatedGroundLEDExtra) {

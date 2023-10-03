@@ -8,6 +8,16 @@ public class GroundPort : Port
     bool isActive = false;
 
     public bool IsActive { get => isActive; }
+
+    public override void Connect(Port other)
+    {
+        base.Connect(other);
+
+        if(other is GroundSwitchPort || other is GroundLEDPort || (other is ICPort iCPort && 
+                (iCPort.Information == "Ground" || iCPort.Information == "GS" || iCPort.Information == "E1")))
+            return;
+        else GameManager.Instance.AddMistake();
+    }
     
     public void Activate() {
         isActive = true;

@@ -30,21 +30,30 @@ public class SwitchPort : Port
 
         // Jika terhubung dengan BridgeOutputPort, terima informasi
         if (other is BridgeOutputPort bridgeOutputPort) {
+            
             receivedInformation = bridgeOutputPort.Information;
 
             // Aktifkan Toggle jika menerima informasi
-            if (!string.IsNullOrEmpty(receivedInformation) && IsSwitchRelatedActive(other)) {
-                Debug.Log("Connect Activate Toggle");
-                toggleObject.EnableSwitch(true);
+            if (!string.IsNullOrEmpty(receivedInformation)) {
+                GameManager.Instance.CheckPort(this, true);
+                if (IsSwitchRelatedActive(other)){
+                    Debug.Log("Connect Activate Toggle");
+                    toggleObject.EnableSwitch(true);
+                }
             }
+            else GameManager.Instance.AddMistake();
         }
+        else GameManager.Instance.AddMistake();
     }
 
     public override void Disconnect(){
         base.Disconnect();
 
         // Nonaktifkan Toggle saat terputus
-        receivedInformation = "";
+        if(!string.IsNullOrEmpty(receivedInformation)){
+            GameManager.Instance.CheckPort(this, false);
+            receivedInformation = "";
+        }
         TurnOffSwitch();
     }
 

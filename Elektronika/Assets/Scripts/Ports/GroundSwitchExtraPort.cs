@@ -13,6 +13,14 @@ public class GroundSwitchExtraPort : Port
         relatedGroundSwitchPort = GetComponentInParent<GroundSwitchPort>();
     }
 
+    public override void Connect(Port other) 
+    {
+        base.Connect(other);
+        
+        if (other is GroundSwitchPort) return;
+        else GameManager.Instance.AddMistake();
+    }
+
     public void Deactivate() {
         isActive = false;
 
