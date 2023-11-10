@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 6222611298026045505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  slotParent: {fileID: 0}
   audioSource: {fileID: 8554142952084412043}
   clip_pickUp: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   clip_drop: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraTouchController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class CameraTouchController : MonoBehaviour
     [SerializeField] Collider2D topCollider;
 
     [Header("UI References")]
+    [SerializeField] Image camSpriteRenderer;
+    [SerializeField] Sprite moveCamSprite;
+    [SerializeField] Sprite interactSprite;
     [SerializeField] TMP_Text buttonText;
     [SerializeField] TMP_Text modeText;
 
@@ -110,5 +114,6 @@ public class CameraTouchController : MonoBehaviour
         topCollider.enabled = isMoveCam;
         buttonText.text = isMoveCam ? "Interact Objects" : "Move Camera";
         modeText.text = isMoveCam ? "Mode: Moving Camera" : "Mode: Interacting Objects";
+        camSpriteRenderer.sprite = isMoveCam ? moveCamSprite : interactSprite;
     }
 }

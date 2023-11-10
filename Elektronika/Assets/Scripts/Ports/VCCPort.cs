@@ -12,7 +12,7 @@ public class VCCPort : Port
     {
         base.Connect(other);
 
-        if(other is PowerBridgePort || (other is ICPort iCPort && (iCPort.Information == "VCC" || iCPort.Information == "EO")))
+        if(other is PowerBridgePort || other is VCC_SegmentPort || (other is ICPort iCPort && (iCPort.Information == "VCC" || iCPort.Information == "EO")))
             return;
         else GameManager.Instance.AddMistake();
     }
@@ -22,6 +22,8 @@ public class VCCPort : Port
 
         if(connectedPort is PowerBridgePort powerBridgePort)
             powerBridgePort.Activate();
+        else if(connectedPort is VCC_SegmentPort vCC_SegmentPort)
+            vCC_SegmentPort.Activate(true);
         else if(connectedPort is ICPort iCPort && (iCPort.Information == "VCC" || iCPort.Information == "EO"))
             iCPort.UpdateActivateIC(true, this);
     }
@@ -31,6 +33,8 @@ public class VCCPort : Port
 
         if(connectedPort is PowerBridgePort powerBridgePort)
             powerBridgePort.Deactivate();
+        else if(connectedPort is VCC_SegmentPort vCC_SegmentPort)
+            vCC_SegmentPort.Activate(false);
         else if(connectedPort is ICPort iCPort)
             iCPort.UpdateActivateIC(false, this);
     }

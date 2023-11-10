@@ -57,7 +57,14 @@ public class ICPortManager : MonoBehaviour
 
         // Debug.Log("VCC: " + isVCCActive + ", Ground: " + isGroundActive + ", GS: " + isGSActive + ", EO: " + isEOActive);
 
-        if(isVCCActive && isGroundActive && isGSActive && isEOActive && isE1Active) {
+        if(GameManager.Instance.GetInsertedICType() == ComponentManager.ComponentType._74LS148 && 
+            isVCCActive && isGroundActive && isGSActive && isEOActive && isE1Active) {
+            foreach(ICPort iCPort in iCPorts.Values) {
+                iCPort.Activate();
+            }
+        }
+        else if(GameManager.Instance.GetInsertedICType() == ComponentManager.ComponentType._7447 && 
+            isVCCActive && isGroundActive) {
             foreach(ICPort iCPort in iCPorts.Values) {
                 iCPort.Activate();
             }
@@ -111,14 +118,25 @@ public class ICPortManager : MonoBehaviour
                 };
                 break;
                 
-            case ComponentManager.ComponentType.Type2:
+            case ComponentManager.ComponentType._7447:
                 informationsToAdd = new Dictionary<string, string>
                 {
-                    { "ICPortName10", "3" },
-                    { "ICPortName24", "5" },
-                    { "ICPortName35", "2" },
-                    { "ICPortName1", "7" },
-                    { "ICPortName23", "4" },
+                    { "Port IC Bot" + (8 + icPosInt), "Ground" },
+                    { "Port IC Bot" + (7 + icPosInt), "A" },
+                    { "Port IC Bot" + (6 + icPosInt), "D" },
+                    { "Port IC Bot" + (5 + icPosInt), "Blank" },
+                    { "Port IC Bot" + (4 + icPosInt), "Blank" },
+                    { "Port IC Bot" + (3 + icPosInt), "Blank" },
+                    { "Port IC Bot" + (2 + icPosInt), "C" },
+                    { "Port IC Bot" + (1 + icPosInt), "B" },
+                    { "Port IC Up" + (8 + icPosInt), "e" },
+                    { "Port IC Up" + (7 + icPosInt), "d" },
+                    { "Port IC Up" + (6 + icPosInt), "c" },
+                    { "Port IC Up" + (5 + icPosInt), "b" },
+                    { "Port IC Up" + (4 + icPosInt), "a" },
+                    { "Port IC Up" + (3 + icPosInt), "g" },
+                    { "Port IC Up" + (2 + icPosInt), "f" },
+                    { "Port IC Up" + (1 + icPosInt) , "VCC" },
                 };
                 break;
         }

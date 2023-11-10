@@ -66,7 +66,7 @@ public class CompLockedSlot : ComponentSlot
             isLocked = !isLocked;
             toggleSpriteRenderer.sprite = isLocked ? sprite_lockClose : sprite_lockOpen;
 
-            if (!isLocked) GameManager.Instance.CheckIC74LS148(false); // Check if the inserted IC is correct
+            if (!isLocked) GameManager.Instance.CheckIC(false); // Check if the inserted IC is correct
 
             UpdateICPortInformation(); // Update ICPorts based on the new locked state
         }
@@ -74,14 +74,11 @@ public class CompLockedSlot : ComponentSlot
 
     private void UpdateICPortInformation()
     {
+        icPortManager.RemoveAllICPortInfo(); // Remove all information on 
         if (isLocked && CurrentComponent != null && CurrentComponent.Type == Type)
         {
             icPortManager.UpdateICPort(Type, icPos); // Change ICPorts information based on component type
-            GameManager.Instance.CheckIC74LS148(true); // Check if the inserted IC is correct
-        }
-        else
-        {
-            icPortManager.RemoveAllICPortInfo(); // Remove all information on 
+            GameManager.Instance.CheckIC(true, Type); // Check if the inserted IC is correct
         }
     }
 

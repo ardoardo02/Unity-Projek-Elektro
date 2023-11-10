@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ComponentManager;
 
 public class SwitchPort : Port
 {
@@ -6,6 +7,8 @@ public class SwitchPort : Port
     [SerializeField, Tooltip("Related Ground Switch Port")] private GroundSwitchPort relatedGroundSwitchPort;
     [SerializeField, Tooltip("Related Toggle Object")] private Switch toggleObject;
     [SerializeField] SwitchManager switchManager;
+    [SerializeField] string[] validCharacters = { "A", "B", "C", "D" };
+
 
     string receivedInformation = "";
     bool isToggleActive = false;
@@ -27,9 +30,11 @@ public class SwitchPort : Port
 
     public override void Connect(Port other) {
         base.Connect(other);
+        Debug.Log(GameManager.Instance.GetInsertedICType());
 
         // Jika terhubung dengan BridgeOutputPort, terima informasi
-        if (other is BridgeOutputPort bridgeOutputPort) {
+        if (GameManager.Instance.GetInsertedICType() == ComponentType._74LS148 && 
+            other is BridgeOutputPort bridgeOutputPort) {
             
             receivedInformation = bridgeOutputPort.Information;
 
@@ -42,6 +47,19 @@ public class SwitchPort : Port
                 }
             }
             else GameManager.Instance.AddMistake();
+        }
+        else if (GameManager.Instance.GetInsertedICType() == ComponentType._7447 &&
+            other is ICPort icPort && System.Array.Exists(validCharacters, element => element == icPort.Information)) {
+
+            // Debug.Log("IC: 7447 | Port: " + icPort.Information);
+            receivedInformation = icPort.Information;
+            GameManager.Instance.CheckPort(this, true);
+
+            if (IsSwitchRelatedActive(other)){
+                Debug.Log("Connect Activate Toggle");
+                toggleObject.EnableSwitch(true);
+            }
+        
         }
         else GameManager.Instance.AddMistake();
     }
@@ -66,6 +84,8 @@ public class SwitchPort : Port
     public void TurnOnSwitch(bool isGround = false) {
         if (isGround && connectedPort is BridgeOutputPort bridgeOutputPort && bridgeOutputPort.IsActive)
             toggleObject.EnableSwitch(true);
+        else if (isGround && connectedPort is ICPort iCPort && iCPort.IsActive)
+            toggleObject.EnableSwitch(true);
         else if (IsSwitchRelatedActive())
             toggleObject.EnableSwitch(true);
     }
@@ -78,6 +98,7 @@ public class SwitchPort : Port
     }
 
     public bool IsSwitchRelatedActive(Port otherPort = null) {
+        Debug.Log("IsSwitchRelatedActive");
         if (otherPort is BridgeOutputPort || connectedPort is BridgeOutputPort) {
             BridgeOutputPort bridgeOutputPort = otherPort is BridgeOutputPort ? (BridgeOutputPort)otherPort : (BridgeOutputPort)connectedPort;
             
@@ -97,6 +118,14 @@ public class SwitchPort : Port
             //             return true;
             //     }
             // }
+        }
+        else if (otherPort is ICPort || connectedPort is ICPort) {
+            ICPort icPort = otherPort is ICPort ? (ICPort)otherPort : (ICPort)connectedPort;
+            if (icPort.IsActive && ((relatedGroundSwitchPort.ConnectedPort is GroundPort && relatedGroundSwitchPort.IsActive) ||
+                (relatedGroundSwitchPort.ConnectedPort is GroundSwitchExtraPort && ((GroundSwitchExtraPort)relatedGroundSwitchPort.ConnectedPort).IsActive))){
+                    Debug.Log("ICPort: " + icPort.Information + " | GroundPort: " + relatedGroundSwitchPort.ConnectedPort.name + " | IsActive: " + relatedGroundSwitchPort.IsActive);
+                    return true;
+                }
         }
         return false;
     }

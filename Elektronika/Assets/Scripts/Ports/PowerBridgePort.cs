@@ -12,7 +12,7 @@ public class PowerBridgePort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if (other is VCCPort vccPort) {
+        if (other is VCCPort vccPort && GameManager.Instance.GetInsertedICType() == ComponentManager.ComponentType._74LS148) {
             GameManager.Instance.CheckPort(this, true);
             if (vccPort.IsActive)
                 Activate();

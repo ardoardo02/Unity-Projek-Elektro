@@ -11,7 +11,9 @@ public class Component : MonoBehaviour
     [SerializeField] AudioClip clip_pickUp, clip_drop;
 
     bool isDragging;
-    Vector2 offset, originalPos;
+    // Vector2 offset, originalPos;
+    Vector2 originalPos;
+    Vector3 originalScale;
     // SpriteRenderer spriteRenderer;
     BoxCollider2D boxCollider;
     ComponentSlot currentSlot;
@@ -20,6 +22,7 @@ public class Component : MonoBehaviour
 
     void Awake() {
         originalPos = transform.position;
+        originalScale = transform.localScale;
         // spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -44,7 +47,8 @@ public class Component : MonoBehaviour
                 currentSlot = null;
 
                 isDragging = true;
-                offset = GetMousePos() - (Vector2)transform.position;
+                transform.localScale = new Vector3(1f, 1f, 1f);
+                // offset = GetMousePos() - (Vector2)transform.position;
                 audioSource.PlayOneShot(clip_pickUp);
             }
         }
@@ -67,6 +71,7 @@ public class Component : MonoBehaviour
                 {
                     if (IsSlotLocked(slotComponent)) {
                         transform.position = originalPos;
+                        transform.localScale = originalScale;
                         return;
                     }
 
@@ -92,11 +97,13 @@ public class Component : MonoBehaviour
             }
 
             transform.position = originalPos;
+            transform.localScale = originalScale;
         }
 
         if (isDragging)
         {
-            transform.position = GetMousePos() - offset;
+            // transform.position = GetMousePos() - offset;
+            transform.position = GetMousePos();
         }
     }
 

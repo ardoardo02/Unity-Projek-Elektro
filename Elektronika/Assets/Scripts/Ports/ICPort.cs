@@ -19,6 +19,10 @@ public class ICPort : Port
 
         if (connectedPort is BridgeInputPort bridgeInputPort)
             bridgeInputPort.Activate();
+        else if (connectedPort is SwitchPort switchPort)
+            switchPort.TurnOnSwitch();
+        else if (connectedPort is ResistorInputPort resistorInputPort)
+            resistorInputPort.Activate(true);
     }
 
     public void Deactivate() {
@@ -26,6 +30,10 @@ public class ICPort : Port
 
         if (connectedPort is BridgeInputPort bridgeInputPort)
             bridgeInputPort.Deactivate();
+        else if (connectedPort is SwitchPort switchPort)
+            switchPort.TurnOffSwitch();
+        else if (connectedPort is ResistorInputPort resistorInputPort)
+            resistorInputPort.Activate(false);
     }
 
     public override void Connect(Port other) {
@@ -70,6 +78,7 @@ public class ICPort : Port
         if (((information == "VCC" || information == "EO") && connectedPort is VCCPort) ||
             ((information == "Ground" || information == "GS" || information == "E1") && connectedPort is GroundPort)) {
             icPortManager.Deactivate(connectedPort, information);
+            GameManager.Instance.CheckPort(this, false);
         }
 
         information = "";

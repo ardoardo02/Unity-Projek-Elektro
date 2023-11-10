@@ -5,7 +5,7 @@ using UnityEngine;
 public class LEDPort : Port
 {
     [Header("LED Settings")]
-    [SerializeField] SwitchManager switchManager;
+    // [SerializeField] SwitchManager switchManager;
     [SerializeField, Tooltip("Related Ground LED Port")] GroundLEDPort relatedGroundLEDPort;
     [SerializeField, Tooltip("Related LED/Light Object")] SpriteRenderer lightSpriteRenderer;
 
@@ -26,10 +26,11 @@ public class LEDPort : Port
     public override void Connect(Port other) {
         base.Connect(other);
 
-        if (other is ResistorOutputPort resistorOutputPort) {
+        if (GameManager.Instance.GetInsertedICType() == ComponentManager.ComponentType._74LS148 && 
+            other is ResistorOutputPort resistorOutputPort) {
             if (!string.IsNullOrEmpty(resistorOutputPort.Information)){
                 receivedInformation = resistorOutputPort.Information;
-                switchManager.CheckSwitches();
+                SwitchManager.Instance.CheckSwitches();
                 GameManager.Instance.CheckPort(this, true);
             }
             else GameManager.Instance.AddMistake();
@@ -56,7 +57,7 @@ public class LEDPort : Port
             ResistorOutputPort resistorOutputPort = (ResistorOutputPort)connectedPort;
             if (!string.IsNullOrEmpty(resistorOutputPort.Information)){
                 receivedInformation = resistorOutputPort.Information;
-                switchManager.CheckSwitches();
+                SwitchManager.Instance.CheckSwitches();
                 // Debug.Log("LEDPort: Check Switch");
             }
         }
