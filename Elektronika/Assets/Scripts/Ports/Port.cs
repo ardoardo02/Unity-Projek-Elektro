@@ -24,6 +24,8 @@ public class Port : MonoBehaviour
         if (CanConnect(other)) {
             // Logika koneksi dasar
         }
+        // Debug.Log("Port is port: " + other.GetType() == "Port");
+        if (other.GetType().ToString() == "Port") GameManager.Instance.AddMistake();
     }
 
     public void SetConnectedPort(Port port) {

@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class SceneLoaderManager : MonoBehaviour
 {
+    [SerializeField] GameObject[] destroyGameObjects;
+
+    public static GameObject[] destroyObjects;
+    private void Awake() {
+        destroyObjects = destroyGameObjects;
+    }
+
     // level
     public static void Load(string sceneName)
     {
         SceneLoader.Load(sceneName);
+
+        if (destroyObjects.Length > 0) {
+            foreach (GameObject gameObject in destroyObjects) {
+                Destroy(gameObject);
+            }
+        }
     }
 
     // progress load
@@ -26,5 +39,11 @@ public class SceneLoaderManager : MonoBehaviour
     public static void LoadNextLevel()
     {
         SceneLoader.LoadNextLevel();
+    }
+
+    // quit game
+    public static void QuitGame()
+    {
+        Application.Quit();
     }
 }

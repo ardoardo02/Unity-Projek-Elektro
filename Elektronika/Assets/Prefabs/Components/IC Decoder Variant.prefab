@@ -14,7 +14,7 @@ PrefabInstance:
     - target: {fileID: 3455151997282539800, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: cb8a6c4df5328464aa93a0bbb15be06c, type: 3}
+      objectReference: {fileID: 21300000, guid: 064a574d5a29fe346b96e32d364e4311, type: 3}
     - target: {fileID: 4316567596097028134, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_Size.x
       value: 0.8275869
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6222611298026045505, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_Name
-      value: IC Decoder
+      value: IC Decoder Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_RootOrder
@@ -58,22 +58,6 @@ PrefabInstance:
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7300443199622288706, guid: 517e890476e26ee4c94510ac78ebaada, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -19,7 +19,10 @@ public class PowerManager : MonoBehaviour
         TogglePower(!isPowerActive);
     }
 
-    private void TogglePower(bool isOn) {
+    public void TogglePower(bool isOn) {
+        if (isPowerActive == isOn)
+            return;
+
         isPowerActive = isOn;
         GameManager.Instance.CheckPowerSwitch(isOn);
         spriteRenderer.sprite = isOn ? sprite_toggleOn : sprite_toggleOff;
@@ -27,5 +30,6 @@ public class PowerManager : MonoBehaviour
         {
             powerPort.TogglePower(isOn);
         }
+        SwitchManager.Instance.CheckSwitches();
     }
 }

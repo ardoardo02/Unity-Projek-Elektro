@@ -105,6 +105,7 @@ public class SwitchPort : Port
             if (bridgeOutputPort.IsActive &&
                 ((relatedGroundSwitchPort.ConnectedPort is GroundPort && relatedGroundSwitchPort.IsActive) ||
                 (relatedGroundSwitchPort.ConnectedPort is GroundSwitchExtraPort && ((GroundSwitchExtraPort)relatedGroundSwitchPort.ConnectedPort).IsActive))) {
+                Debug.Log("BridgeOutputPort: " + bridgeOutputPort.Information + " | GroundPort: " + relatedGroundSwitchPort.ConnectedPort.name + " | IsActive: " + relatedGroundSwitchPort.IsActive);
                 return true;
             }
             // if (bridgeOutputPort.IsActive) {

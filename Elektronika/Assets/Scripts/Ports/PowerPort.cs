@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PowerPort : Port
 {
+    [SerializeField] PortManager portManager;
+
     bool isPowerActive = false;
 
     public bool IsPowerActive { get => isPowerActive; }
@@ -24,5 +26,9 @@ public class PowerPort : Port
             powerVCCPort.TogglePower(isOn);
         else if (connectedPort is PowerGroundPort powerGroundPort)
             powerGroundPort.TogglePower(isOn);
+    }
+
+    public void DisconnectConnection() {
+        portManager.DisconnectExistingConnection(this);
     }
 }

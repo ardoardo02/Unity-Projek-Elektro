@@ -13,6 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text mistakeCountText;
     [SerializeField] Task task;
 
+    [Header("Barriers")]
+    [SerializeField] GameObject cablesBarrier;
+    [SerializeField] GameObject powerCablesBarrier;
+    [SerializeField] PowerPort[] powerPorts;
+    [SerializeField] GameObject powerBarrier;
+    [SerializeField] PowerManager powerManager;
+
     [Header("Audio")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip connectedSound;
@@ -117,7 +124,10 @@ public class GameManager : MonoBehaviour
                     AddMistake();
                     return;
                 }
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, true);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, true);
+                    powerCablesBarrier.SetActive(false);
+                }
             }
             else if (port is VCC_SegmentPort) {
                 vccSegmentConnected++;
@@ -127,7 +137,10 @@ public class GameManager : MonoBehaviour
                     AddMistake();
                     return;
                 }
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, true);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, true);
+                    powerCablesBarrier.SetActive(false);
+                }
             }
             else if (componentType == ComponentManager.ComponentType._7447 && port is GroundSwitchPort){
                 switchGroundConnected++;
@@ -137,15 +150,24 @@ public class GameManager : MonoBehaviour
                     AddMistake();
                     return;
                 }
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, true);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, true);
+                    powerCablesBarrier.SetActive(false);
+                }
             }
             else if (port is PowerVCCPort || port is PowerGroundPort) {
                 powerConnected++;
-                if (powerConnected >= 2) task.SetCompletedTask(2, true);
+                if (powerConnected >= 2) {
+                    task.SetCompletedTask(2, true);
+                    powerBarrier.SetActive(false);
+                }
             } 
             else {
                 cablesConnected++;
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, true);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, true);
+                    powerCablesBarrier.SetActive(false);
+                }
             }
 
             taskFinished++;
@@ -156,7 +178,13 @@ public class GameManager : MonoBehaviour
         else {
             if (port is GroundLEDPort) {
                 ledGroundConnected--;
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, false);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, false);
+                    powerCablesBarrier.SetActive(true);
+                    foreach (var powerPort in powerPorts){
+                        powerPort.DisconnectConnection();
+                    }
+                }
                 cablesConnected--;
                 if (ledGroundConnected >= 3) {
                     cablesConnected++;
@@ -165,7 +193,13 @@ public class GameManager : MonoBehaviour
             }
             else if (port is VCC_SegmentPort) {
                 vccSegmentConnected--;
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, false);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, false);
+                    powerCablesBarrier.SetActive(true);
+                    foreach (var powerPort in powerPorts){
+                        powerPort.DisconnectConnection();
+                    }
+                }
                 cablesConnected--;
                 if (vccSegmentConnected >= 1) {
                     cablesConnected++;
@@ -174,7 +208,13 @@ public class GameManager : MonoBehaviour
             }
             else if (componentType == ComponentManager.ComponentType._7447 && port is GroundSwitchPort){
                 switchGroundConnected--;
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, false);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, false);
+                    powerCablesBarrier.SetActive(true);
+                    foreach (var powerPort in powerPorts){
+                        powerPort.DisconnectConnection();
+                    }
+                }
                 cablesConnected--;
                 if (switchGroundConnected >= 4) {
                     cablesConnected++;
@@ -183,10 +223,20 @@ public class GameManager : MonoBehaviour
             }
             else if (port is PowerVCCPort || port is PowerGroundPort) {
                 powerConnected--;
-                if (powerConnected < 2) task.SetCompletedTask(2, false);
+                if (powerConnected < 2) {
+                    task.SetCompletedTask(2, false);
+                    powerBarrier.SetActive(true);
+                    powerManager.TogglePower(false);
+                }
             } 
             else {
-                if (cablesConnected == totalCables) task.SetCompletedTask(1, false);
+                if (cablesConnected == totalCables) {
+                    task.SetCompletedTask(1, false);
+                    powerCablesBarrier.SetActive(true);
+                    foreach (var powerPort in powerPorts){
+                        powerPort.DisconnectConnection();
+                    }
+                }
                 cablesConnected--;
             }
             taskFinished--;
@@ -201,6 +251,7 @@ public class GameManager : MonoBehaviour
         this.isICInserted = isICInserted;
         componentType = comType;
         task.SetCompletedTask(0, isICInserted);
+        cablesBarrier.SetActive(!isICInserted);
         
         if (isICInserted) taskFinished++;
         else {

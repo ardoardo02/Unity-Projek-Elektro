@@ -8,6 +8,7 @@ public class CameraTouchController : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField, Range(0, 20)] float filterFactor = 10;
+    float camSens;
     [SerializeField, Range(0, 3)] float dragFactor = 1;
     [SerializeField, Range(0, 2)] float zoomFactor = 1;
     [SerializeField] float minCamSize = 5;
@@ -37,6 +38,8 @@ public class CameraTouchController : MonoBehaviour
         topCollider.enabled = isMoveCam;
         firstHalfCamSize = ((maxCamSize - minCamSize) / 4) + minCamSize;
         secondHalfCamSize = maxCamSize - ((maxCamSize - minCamSize) / 4);
+
+        camSens = PlayerPrefs.GetFloat("CamSens", filterFactor);
     }
 
     private void Update() {
@@ -76,7 +79,7 @@ public class CameraTouchController : MonoBehaviour
                 this.transform.position = Vector3.Lerp(
                     this.transform.position,
                     targetPos,
-                    Time.deltaTime * filterFactor
+                    Time.deltaTime * camSens
                 );
             }
         }

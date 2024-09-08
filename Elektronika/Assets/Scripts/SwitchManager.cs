@@ -138,21 +138,26 @@ public class SwitchManager : MonoBehaviour
         // turn on segment based on active switches
         if (activeSwitches.Count == 0) {
             segmentSpriteRenderer.sprite = segnmentSprites[0]; // = 0
+            GameManager.Instance.CheckInput(0);
         }
         else if (activeSwitches.Count == 1) {
             switch (activeSwitches[0])
             {
                 case "A":
                     segmentSpriteRenderer.sprite = segnmentSprites[1]; // A = 1
+                    GameManager.Instance.CheckInput(1);
                     break;
                 case "B":
                     segmentSpriteRenderer.sprite = segnmentSprites[2]; // B = 2
+                    GameManager.Instance.CheckInput(2);
                     break;
                 case "C":
                     segmentSpriteRenderer.sprite = segnmentSprites[4]; // C = 4
+                    GameManager.Instance.CheckInput(4);
                     break;
                 case "D":
                     segmentSpriteRenderer.sprite = segnmentSprites[8]; // D = 8
+                    GameManager.Instance.CheckInput(8);
                     break;
             }
         }
@@ -160,42 +165,53 @@ public class SwitchManager : MonoBehaviour
             if (activeSwitches.Contains("A")) {
                 if (activeSwitches.Contains("B")) {
                     segmentSpriteRenderer.sprite = segnmentSprites[3]; // A + B = 3
+                    GameManager.Instance.CheckInput(3);
                 }
                 else if (activeSwitches.Contains("C")) {
                     segmentSpriteRenderer.sprite = segnmentSprites[5]; // A + C = 5
+                    GameManager.Instance.CheckInput(5);
                 }
                 else if (activeSwitches.Contains("D")) {
                     segmentSpriteRenderer.sprite = segnmentSprites[9]; // A + D = 9
+                    GameManager.Instance.CheckInput(9);
                 }
             }
             else if (activeSwitches.Contains("B")) {
                 if (activeSwitches.Contains("C")) {
                     segmentSpriteRenderer.sprite = segnmentSprites[6]; // B + C = 6
+                    GameManager.Instance.CheckInput(6);
                 }
                 else if (activeSwitches.Contains("D")) {
                     segmentSpriteRenderer.sprite = segnmentSprites[10]; // B + D = 10
+                    GameManager.Instance.CheckInput(10);
                 }
             }
             else if (activeSwitches.Contains("C") && activeSwitches.Contains("D")) {
                 segmentSpriteRenderer.sprite = segnmentSprites[10]; // C + D = 12
+                GameManager.Instance.CheckInput(10);
             }
         }
         else if (activeSwitches.Count == 3) {
             if (!activeSwitches.Contains("D")) {
                 segmentSpriteRenderer.sprite = segnmentSprites[7]; // A + B + C = 7
+                GameManager.Instance.CheckInput(7);
             }
             else if (!activeSwitches.Contains("C")) {
                 segmentSpriteRenderer.sprite = segnmentSprites[10]; // A + B + D = 11
+                GameManager.Instance.CheckInput(10);
             }
             else if (!activeSwitches.Contains("B")) {
                 segmentSpriteRenderer.sprite = segnmentSprites[10]; // A + C + D = 13
+                GameManager.Instance.CheckInput(10);
             }
             else if (!activeSwitches.Contains("A")) {
                 segmentSpriteRenderer.sprite = segnmentSprites[10]; // B + C + D = 14
+                GameManager.Instance.CheckInput(10);
             }
         }
         else if (activeSwitches.Count == 4) {
             segmentSpriteRenderer.sprite = segnmentSprites[10]; // A + B + C + D = 15
+            GameManager.Instance.CheckInput(10);
         }
     }
 
